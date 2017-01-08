@@ -1,3 +1,44 @@
+Apollia's note, Jan. 7, 2017: 
+
+VUE slightly modified to suit my personal tastes.
+
+Warning: This might be glitchy.  I'm still mostly a Java newbie.
+
+
+But, here's what I managed to do so far:
+
+* Turned on debug mode.
+
+
+* Made it so when running VUE on a Unix-like platform, the default Java look-and-feel is now GTK, not Metal.  (This is just to make VUE blend in better with my preferred dark GTK theme.)
+
+
+* Switching to the GTK look-and-feel somehow made it impossible to get out of (or into) split-screen mode.  So, I got rid of the split-screen that appears at startup.  (Told the mViewerSplit object to remove its righthand panel.)
+
+
+* Made it possible to successfully open files and web pages by clicking resource buttons attached to nodes (or as I prefer to call them, bubbles).
+
+Now, VUE doesn't try to open GNOME, KDE, Firefox, or Netscape to deal with filepath resources or URL resources attached to bubbles.
+
+Instead, VUE tries to send filepaths to a shell command called "for_vue---filepath_opener", and tries to send URLs to a shell command called "for_vue---weburl_opener".
+
+Those shell commands can do anything you want.  On my system, "for_vue---filepath_opener" is simply a symlink to Puppy Linux's default file-manager, Rox-Filer, and "for_vue---weburl_opener" is a symlink to the Pale Moon web browesr.
+
+
+* Changed the default background color for new maps to black.
+
+
+* Removed the border from the "Search Everything" box (which apparently doesn't do anything, at least in Puppy Linux) and changed it to green text on a black background.
+
+
+Warning: This might be glitchy.  I'm still mostly a Java newbie.
+
+End of note by Apollia.
+
+-----
+Text not by Apollia:
+-----
+
 Visual Understanding Environment (VUE) is a powerful teaching and presentation tool.
 
 1. Code Organization
