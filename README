@@ -22,7 +22,11 @@ Now, VUE doesn't try to open GNOME, KDE, Firefox, or Netscape to deal with filep
 
 Instead, VUE tries to send filepaths to a shell command called "for_vue---filepath_opener", and tries to send URLs to a shell command called "for_vue---weburl_opener".
 
-Those shell commands can do anything you want.  On my system, "for_vue---filepath_opener" is simply a symlink to Puppy Linux's default file-manager, Rox-Filer, and "for_vue---weburl_opener" is a symlink to the Pale Moon web browesr.
+Those shell commands can do anything you want.  On my system, "for_vue---filepath_opener" is simply a symlink to Puppy Linux's default file-manager, Rox-Filer, and "for_vue---weburl_opener" is a symlink to the Pale Moon web browser.
+
+So, now I can do things like launch other programs and scripts, and visit web pages, just by clicking currently inconveniently tiny buttons in VUE.
+
+Reminds me a little of HyperCard.  http://www.loper-os.org/?p=568
 
 
 * Changed the default background color for new maps to black.
