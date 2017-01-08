@@ -28,7 +28,7 @@ public class DEBUG
 
     public static boolean Enabled; // can user turn debug switches on
 
-    public static boolean INIT = false; // startup / initializations
+    public static boolean INIT = true; // startup / initializations
     
     // Can leave these as static for runtime tweaking, or
     // make final static to have compiler strip them out entirely.
