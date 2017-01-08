@@ -135,7 +135,7 @@ public class LWMap extends LWContainer
     public LWMap(String label) {
         initMap();
         setID("0");
-        setFillColor(java.awt.Color.white);
+        setFillColor(java.awt.Color.black);
         setTextColor(COLOR_TEXT);
         setStrokeColor(COLOR_STROKE);
         setFont(FONT_DEFAULT);
