@@ -1,11 +1,13 @@
-Apollia's note, Jan. 7, 2017: 
+Last modified Jan. 23, 2017.
 
 VUE slightly modified to suit my personal tastes.
 
 Warning: This might be glitchy.  I'm still mostly a Java newbie.
 
 
-But, here's what I managed to do so far:
+Apollia's notes from Jan. 7, 2017: 
+
+Here's what I managed to do so far:
 
 * Turned on debug mode.
 
@@ -32,12 +34,32 @@ Reminds me a little of HyperCard.  http://www.loper-os.org/?p=568
 * Changed the default background color for new maps to black.
 
 
-* Removed the border from the "Search Everything" box (which apparently doesn't do anything, at least in Puppy Linux) and changed it to green text on a black background.
+* Removed the border from the "Search Everything" box (which apparently doesn't do anything, at least in Puppy Linux) and changed it to green text on a darker green background.
+
+
+----
+
+Apollia's notes from Jan. 23, 2017:
+
+Recent changes or additions:
+
+* A new submenu of the Edit menu called "Etc."  I moved the dangerous "Cut" and "Delete" menu items into it.
+
+
+* A new command, "Insert Current Date/Time" (keyboard shortcut: F5).  It's in the new "Insert Bubble or Text" submenu of the Edit menu.
+
+It inserts dates in this format: 2017-01-23 14:55:49
+
+It works on bubbles or links, but for some reason, doesn't work on text blocks.  (Which I didn't fix, because I never use text blocks anyway.)
+
+If no node or link is selected, or if more than one is selected, a new bubble is created, containing the current date/time.
+
+If one node or link is selected, the current date/time is added to the label of the selected bubble or link, either at the end of the label, or wherever the caret currently is.
 
 
 Warning: This might be glitchy.  I'm still mostly a Java newbie.
 
-End of note by Apollia.
+End of notes by Apollia.
 
 -----
 Text not by Apollia:
