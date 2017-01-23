@@ -57,6 +57,15 @@ If no node or link is selected, or if more than one is selected, a new bubble is
 If one node or link is selected, the current date/time is added to the label of the selected bubble or link, either at the end of the label, or wherever the caret currently is.
 
 
+* Changed the original dangerous behavior of ESC while editing a bubble label or link label.
+
+Originally, ESC would delete all the changes to a bubble label or link label, and even Undo or Redo couldn't retrieve whatever was deleted.
+
+Now, ESC leaves the label text alone, and just deselects the bubble or link you were editing.
+
+(Which is how text blocks already reacted to ESC, so I didn't change anything related to text blocks.)
+
+
 Warning: This might be glitchy.  I'm still mostly a Java newbie.
 
 End of notes by Apollia.
