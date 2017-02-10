@@ -85,7 +85,7 @@ Recent changes or additions:
 
 * Formerly, the text caret couldn't be seen on dark backgrounds.  To fix that, the text caret is given the same color as the current bubble or link's text color.
 
-* I attempted to make word wrap work inside bubbles.  I got surprisingly far with it, but, unfortunately, word-wrapping goes away when you load a saved map.  So, it won't be very useful until I figure out how to fix that.
+* I attempted to make word wrap work inside bubbles.  I got surprisingly far with it, but, unfortunately, word-wrapping went away when I loaded a saved map.  And also when changing the text color.  So, I reverted those changes, since wordwrap won't be very useful until I figure out how to fix all that.
 
 
 Warning: This might be glitchy.  I'm still mostly a Java newbie.
