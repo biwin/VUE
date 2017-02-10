@@ -1,4 +1,4 @@
-Last modified Jan. 23, 2017.
+Last modified Feb. 10, 2017.
 
 VUE slightly modified to suit my personal tastes.
 
@@ -69,6 +69,23 @@ Now, ESC leaves the label text alone, and just deselects the bubble or link you 
 * Now, bubbles dragged into other bubbles won't be shrunk down and won't have their background colors darkened.
 
 And images dragged into bubbles also won't be shrunk down.
+
+
+----
+
+Apollia's notes from Feb. 10, 2017:
+
+Recent changes or additions:
+
+* Formerly, clicking a bubble to edit it would unnecessarily highlight all text.  Now, VUE automatically unhighlights that text, so fewer clicks are necessary to edit a bubble.
+
+* A new Edit menu item - Deselect. (Keyboard shortcut: ESC)  Only works if only one item is selected.
+
+* All text in both bubbles and links is now left-justified.
+
+* Formerly, the text caret couldn't be seen on dark backgrounds.  To fix that, the text caret is given the same color as the current bubble or link's text color.
+
+* I attempted to make word wrap work inside bubbles.  I got surprisingly far with it, but, unfortunately, word-wrapping goes away when you load a saved map.  So, it won't be very useful until I figure out how to fix that.
 
 
 Warning: This might be glitchy.  I'm still mostly a Java newbie.
