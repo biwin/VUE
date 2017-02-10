@@ -85,8 +85,8 @@ public class LWNode extends LWContainer
 
     public static final Object TYPE_TEXT = "textNode";
     
-    final static boolean WrapText = false; // under development
-    
+   // public boolean WrapText = false; // under development
+    //final static boolean WrapText = true; // under development
     // todo: all this stuff should be in a factory some day
     public static final Font  DEFAULT_NODE_FONT = VueResources.getFont("node.font");
     public static final Color DEFAULT_NODE_FILL = VueResources.getColor("node.fillColor");
@@ -669,7 +669,8 @@ public class LWNode extends LWContainer
     @Override
     public boolean isAutoSized() {
         if (WrapText)
-            return false; // LAYOUT-NEW
+           // return false; // LAYOUT-NEW
+        	 return isAutoSized;
         else
             return isAutoSized;
     }
@@ -1192,6 +1193,7 @@ public class LWNode extends LWContainer
 //             min = layoutCentered(request);
 //         }
 
+      //  isCenterLayout = false;
         isCenterLayout = !isRectShape;
 
 //         if (isRectShape) {
@@ -1272,9 +1274,19 @@ public class LWNode extends LWContainer
     protected Size getTextSize() {
 
         if (WrapText) {
-            Size s = new Size(getLabelBox().getSize());
+           // Size s = new Size(getLabelBox().getSize());
             //s.width += 3;
+        	
+        	Size ps = new Size(getLabelBox().getPreferredSize());
+            Size s = new Size(getLabelBox().getSize());
+            //if (ps.width > s.width) 
+            //    s.width = s.width; // what the hell
+            if (ps.height < s.height)
+                s.height = ps.height;
+            s.width *= TextWidthFudgeFactor;
+            s.width += 3;
             return s;
+            
         } else {
 
             // TODO: Check if this hack still needed in current JVM's
@@ -1282,14 +1294,14 @@ public class LWNode extends LWContainer
             // getSize somtimes a bit bigger thatn preferred size & more accurate
             // This is gross, but gives us best case data: we want the largest in width,
             // and smallest in height, as reported by BOTH getSize and getPreferredSize.
-
-            Size s = new Size(getLabelBox().getPreferredSize());
-            Size ps = new Size(getLabelBox().getSize());
+        	
+            Size ps = new Size(getLabelBox().getPreferredSize());
+            Size s = new Size(getLabelBox().getSize());
             //if (ps.width > s.width) 
             //    s.width = s.width; // what the hell
             if (ps.height < s.height)
                 s.height = ps.height;
-            s.width *= TextWidthFudgeFactor;
+           s.width *= TextWidthFudgeFactor;
             s.width += 3;
             return s;
         }
@@ -1298,6 +1310,8 @@ public class LWNode extends LWContainer
     private int getTextWidth() {
         if (WrapText)
             return labelBox.getWidth();
+        
+        	//return Math.round(getTextSize().width);
         else
             return Math.round(getTextSize().width);
     }
@@ -1367,6 +1381,7 @@ public class LWNode extends LWContainer
      */
     private boolean growShapeUntilContainsContent(RectangularShape shape, NodeContent content)
     {
+    	out("now in growShapeUntilContainsContent");
         final int MaxTries = 1000; // in case of loops (e.g., a broke shape class whose contains() never succeeds)
         final float increment;
         if (content.width > content.height)
@@ -1854,6 +1869,7 @@ public class LWNode extends LWContainer
     // todo: may not need all three args
     private Size layoutBoxed_floating_text(Size request, Size curSize, Object triggerKey)
     {
+    	out("now in layoutBoxed_floating_text");
         if (DEBUG.LAYOUT) out("*** layoutBoxed_floating_text, req="+request + " cur=" + curSize + " trigger=" + triggerKey);
 
         final Size min = new Size(); // the minimum size of the Node
@@ -1977,7 +1993,12 @@ public class LWNode extends LWContainer
                     newTextSize.fitWidth(labelBox.getMaxWordWidth());
                 }
                 newTextSize.height = labelBox.getHeight();
-
+                
+                
+                
+                newTextSize.width = request.width - textPadWidth;
+                newTextSize.height = request.height - textPadHeight;
+                newTextSize.fitWidth(labelBox.getMaxWordWidth());
             }
         }
 

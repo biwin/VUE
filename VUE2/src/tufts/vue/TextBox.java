@@ -30,6 +30,7 @@ import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.font.TextAttribute;
 import java.awt.geom.Rectangle2D;
+import java.util.List;
 import java.awt.geom.Point2D;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.DataFlavor;
@@ -52,6 +53,8 @@ import javax.swing.TransferHandler;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.*;
+
+import org.apache.commons.lang.StringUtils;
 
 //import java.awt.font.LineBreakMeasurer;
 //import java.awt.font.TextAttribute;
@@ -115,8 +118,8 @@ public class TextBox extends JTextPane
     private static final org.apache.log4j.Logger Log = org.apache.log4j.Logger.getLogger(TextBox.class);
     
 // todo: duplicate not working[? for wrap only? ]
-
-    private static final boolean WrapText = LWNode.WrapText;
+    private boolean WrapText = false;
+  //  private static final boolean WrapText = LWNode.WrapText;
     private static final Color SelectionColor = GUI.getTextHighlightColor();//VueResources.getColor("mapViewer.textBox.selection.color");
     
     private static boolean TestDebug = false;
@@ -136,14 +139,25 @@ public class TextBox extends JTextPane
     TextBox(LWComponent lwc)
     {
         this(lwc, null);
+        this.WrapText=lwc.WrapText;
+       
+        out("Wraptext equals " + String.valueOf(WrapText) );
+        
+        out ("lwc wraptext equals " + String.valueOf(lwc.WrapText) );
     }
 
     TextBox(LWComponent lwc, String text)
-    {
+    {	
         if (DEBUG.TEXT && DEBUG.LAYOUT) tufts.Util.printClassTrace("tufts.vue.", "NEW TextBox, txt=" + text);
         if (TestDebug||DEBUG.TEXT) out("NEW [" + text + "] " + lwc);
         
         this.lwc = lwc;
+        this.WrapText=lwc.WrapText;
+        
+        out("Wraptext equals " + String.valueOf(WrapText) );
+        
+        out ("lwc wraptext equals " + String.valueOf(lwc.WrapText) );
+        
         //setBorder(javax.swing.border.LineBorder.createGrayLineBorder());
         // don't set border -- adds small margin that screws us up, especially
         // at high scales
@@ -254,6 +268,8 @@ public class TextBox extends JTextPane
     @Override
     public void addNotify()
     {
+    //	out("now in addNotify");
+    	
         if (TestDebug||DEBUG.TEXT) out("*** ADDNOTIFY ***");
         if (getText().length() < 1)
             setText("<label>");
@@ -289,6 +305,7 @@ public class TextBox extends JTextPane
                         );
                 }
                 if (WrapText) {
+                	out("zoom wraptext");
                     double boxZoom = zoomedPointSize / preZoomFont.getSize();
                     size.width *= boxZoom;
                     size.height *= boxZoom;
@@ -337,13 +354,18 @@ public class TextBox extends JTextPane
             setBackground(background);
         }
         setSize(size);
-
+        
         Dimension preferred = getPreferredSize();
         int w = getWidth() + 1;
-        if (w < preferred.width)
+        
+       // out( "w: " + String.valueOf(w) );
+       // out( "preferred width: " + String.valueOf(preferred.width) );
+        if (w <= preferred.width)
             mKeepTextWidth = true;
         else
             mKeepTextWidth = false;
+        
+        out( "mKeepTextWidth: " + String.valueOf(mKeepTextWidth) );
         if (TestDebug||DEBUG.TEXT) out("width+1=" + w + " < preferred.width=" + preferred.width + " fixedWidth=" + mKeepTextWidth);
         
         if (TestDebug||DEBUG.TEXT) out("addNotify end: insets="+getInsets());
@@ -372,7 +394,15 @@ public class TextBox extends JTextPane
         if (mFirstAfterAddNotify == false) {
             // if cleared, it was used
             out("restoring expanded width");
+            out("yay");
+            
+          //  Size ps = new Size(lwc.getLabelBox().getPreferredSize());
+            
+          //  setSize( ps.width, ps.height);
+            
+            out("zomg");
             setSize(new Dimension(getWidth()-1, getHeight()));
+            //setSize(new Dimension(getWidth()-1, getHeight()));
             //out("SKPPING restoring expanded width");
         } else
             mFirstAfterAddNotify = false;
@@ -382,7 +412,10 @@ public class TextBox extends JTextPane
             setDocumentFont(preZoomFont);
             preZoomFont = null;
             if (WrapText) {
-                adjustSizeDynamically();
+            	out("got here");
+               // adjustSizeDynamically();
+    //        	setSize(getPreferredSize());
+   //       	setSize(getPreferredSize());
             } else {
                 setSize(getPreferredSize());
                 // WE MUST DO THIS A SECOND TIME TO MAKE SURE THIS WORKS:
@@ -403,6 +436,7 @@ public class TextBox extends JTextPane
         // this set's the "mark to the point" -- sets them to the same
         // location, thus clearing the selection.
         setCaretPosition(getCaretPosition());
+        setCaretColor(lwc.getTextColor() );
     }
 
     @Override
@@ -418,10 +452,11 @@ public class TextBox extends JTextPane
             System.err.println(e);
             }*/ 
         if (TestDebug||DEBUG.TEXT) out("setText[" + text + "]");
+   //     out("argh") ;
         super.setText(text);
         copyStyle(this.lwc);
         if (WrapText) {
-            ;
+        //   out("grrr") ;
         } else {
             setSize(getPreferredSize());
         }
@@ -490,7 +525,7 @@ public class TextBox extends JTextPane
         if (TestHarness || c instanceof LWNode && ((LWNode)c).isTextNode())
             StyleConstants.setAlignment(a, StyleConstants.ALIGN_LEFT);
         else
-            StyleConstants.setAlignment(a, StyleConstants.ALIGN_CENTER);
+            StyleConstants.setAlignment(a, StyleConstants.ALIGN_LEFT);
         StyleConstants.setForeground(a, c.getTextColor());
         final Font font = c.getFont();
         setFontAttributes(a, font,c);
@@ -505,7 +540,11 @@ public class TextBox extends JTextPane
 
         if (WrapText) {
             // adjust WIDTH ONLY (or: attempt to keep aspect)
-            //adjustSize(false);
+           // adjustSize(false);
+        	setSize(getPreferredSize());
+            setSize(getPreferredSize());
+        	out("woof");
+        	
         } else {
             setSize(getPreferredSize());
             setSize(getPreferredSize());
@@ -515,18 +554,25 @@ public class TextBox extends JTextPane
 
     /** compute mMaxWordWidth and mMaxCharWidth */
     private void computeMinimumWidth(Font font, String text) {
+    	//out (" now in computeMinimumWidth");
         mMaxCharWidth = (float) font.getMaxCharBounds(DefaultFontContext).getWidth();
         try {
             mMaxWordWidth = maxWordWidth(font, text);
         } catch (Exception e) {
             mMaxWordWidth = mMaxCharWidth;
         }
+      //  out ( Float.toString(mMaxWordWidth) ); 
+      //  out ( Float.toString(mMaxCharWidth) ); 
+        
+       // System.out.printf("%.2f", mMaxWordWidth ) );
+     //   out ( System.out.printf("%.2f", mMaxCharWidth ) );
     }
 
     private static final boolean DebugWord = false;
     private static final int BigWordLen = 9;
     private float maxWordWidth(Font font, String text) {
-
+    //	out ("now in maxwordwidth");
+    //	out ( Float.toString( mMaxCharWidth));
         if (text == null || text.length() == 0)
             return mMaxCharWidth;
 
@@ -584,6 +630,7 @@ public class TextBox extends JTextPane
                 
             if (wordWidth > maxWidth) {
                 if (c == 0 && curRunIdx == 0) {
+                	out("now in this section");
                     // If no whitespace in the whole thing, allow some breaking (should never happen currently)
                     return wordWidth < mMaxCharWidth * BigWordLen ? wordWidth : mMaxCharWidth * BigWordLen;
                 } else {
@@ -599,6 +646,12 @@ public class TextBox extends JTextPane
         
         if (DebugWord || DEBUG.TEXT) out("maxWord[" + text.substring(maxRunIdx, maxRunIdx + maxRunLen) + "] w=" + maxWidth);
 
+        if (WrapText)
+        {
+        	//Dimension preferred = getPreferredSize();
+        	////maxWidth=preferred.width;
+        	//maxWidth=getWidth();
+        }
         return maxWidth;
     }
 
@@ -608,6 +661,7 @@ public class TextBox extends JTextPane
      */
     public void doLayout()
     {
+    	
         if (getParent() instanceof MapViewer) {
             // Automatic layout (e.g. FlowLayout)
             // produces two layout passes -- perhaps
@@ -619,7 +673,9 @@ public class TextBox extends JTextPane
                 out("skipping size fix-up");
             else {
                 if (WrapText)
-                    adjustSizeDynamically();
+                {   adjustSizeDynamically();
+                //	out("adjusting size dynamically");
+                }
                 else {
                     setSize(getPreferredSize());
                     setSize(getPreferredSize());
@@ -710,8 +766,110 @@ public class TextBox extends JTextPane
     {
         if (DEBUG.KEYS) out(e.toString());
         //System.out.println("TextBox: " + e);
-
+        //out("TextBox: " + e);
         //if (VueUtil.isAbortKey(e)) // check for ESCAPE for CTRL-Z or OPTION-Z if on mac
+        
+       // WrapText=true;
+	//	lwc.WrapText=true;
+	//	lwc.setAutoSized(true);
+		
+        
+        if (WrapText)
+        {
+        	if (e.getKeyCode() == KeyEvent.VK_ENTER)
+        	{
+        		//out("Wraptext equals " + String.valueOf(WrapText) );
+                
+               // out ("lwc wraptext equals " + String.valueOf(lwc.WrapText) );
+        	}
+        }
+        if ( WrapText == false )
+        {
+        	if (e.getKeyCode() == KeyEvent.VK_ENTER)
+        	{
+        		e.consume();
+        		// Apollia's note, Feb. 9, 2017, 10:34 PM EST.
+        		// Gets rid of the newline so it's not necessary to chomp it.
+        		
+        		
+        		WrapText=true;
+        		lwc.WrapText=true;
+        		lwc.setAutoSized(true);
+        		//out("Wraptext equals " + String.valueOf(WrapText) );
+             //   out ("lwc wraptext equals " + String.valueOf(lwc.WrapText) );
+                
+                String text = getText();
+                text=text + " ";
+                setText(text);
+                // Apollia's note, Feb. 9, 2017, 10:33 PM.
+                // Replaces the newline with a space.
+                
+                //   out("Unchomped: " + text);
+               // text=StringUtils.chomp(text);
+            //    text=text + " ";
+             //   out("Maybe chomped: " + text);
+              //  setText(text);
+              //  out ("Before trying to activate label edit");
+                
+              //  setSize(this.getWidth(), 50);
+            //    adjustSizeDynamically();
+ //               setSize(getPreferredSize());
+                getParent().remove(this); // will trigger a save (via focusLost)
+                out ("zzzzz");
+                
+                
+                
+                // Apollia's note, Feb. 10, 2017, 2:01 AM EST.
+                // Wasn't able to figure out how to automatically
+                // reactivate the label editor after pressing Enter.
+                
+                /*
+                
+                final MapViewer viewer = VUE.getActiveViewer();
+
+                LWSelection s = VUE.getSelection();
+List<LWComponent> listofselected=s.contents();
+        		
+        		LWComponent thisitem = listofselected.get(0);
+        		
+        		int caretpos = thisitem.getCaretPosition();
+        		viewer.activateLabelEdit(thisitem);
+        		thisitem.clearSelection();
+        		thisitem.setCaretPosition(caretpos);
+        		out("WOOF");
+        		thisitem.insertStringAtCaret( "WOOF" );
+        		
+        		*/
+                
+               // mKeepTextWidth=true;
+              //  VUE.getActiveViewer().activateLabelEdit(lwc);
+             //   LWSelection s = VUE.getSelection();
+              //  s.clear();
+              //  VUE.getActiveViewer().activateLabelEdit(lwc);
+               // setText(text);
+              
+                
+               // Actions.Rename.act(lwc);
+                // Apollia's note, Feb. 9, 2017, 11:29 PM EST.
+                // Darn, for some reason the 
+                // preceding line wipes out the label text.
+                // Feb. 10, 2017, 1:33 AM.  At least if the event
+                // isn't consumed.  Then, it doesn't do anything.
+                
+                //VUE.getActiveViewer().activateLabelEdit(lwc);
+               // VUE.getActiveViewer().activateLabelEdit(lwc);
+ //               MapViewer viewer = (MapViewer) javax.swing.SwingUtilities.getAncestorOfClass(MapViewer.class, this);
+   //             viewer.activateLabelEdit(lwc);
+                //  LWSelection s = VUE.getSelection();
+                
+              ////  
+
+        	//	out("Enter pressed!");
+        	}
+        }
+        
+        
+        
         if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
             // Modified by Apollia on Jan. 23, 2017, to prevent ESC from
         	// deleting the text you added to a bubble label or
@@ -723,8 +881,11 @@ public class TextBox extends JTextPane
         	e.consume();
 
             getParent().remove(this); // will trigger a save (via focusLost)
+            
             LWSelection s = VUE.getSelection();
             s.clear();
+            
+            
         //    super.setText(mUnchangedText); 
         //    setSize(mUnchangedSize); // todo: won't be good enough if we ever resize the actual node as we type
         } else if (isFinishEditKeyPress(e)) {
@@ -741,6 +902,8 @@ public class TextBox extends JTextPane
         } else
             keyWasPressed = true;
 
+        
+        
         // action keys will be ignored if we consume this here!
         // (e.g., "enter" does nothing)
         //e.consume();
