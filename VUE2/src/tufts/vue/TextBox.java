@@ -490,7 +490,8 @@ public class TextBox extends JTextPane
         if (TestHarness || c instanceof LWNode && ((LWNode)c).isTextNode())
             StyleConstants.setAlignment(a, StyleConstants.ALIGN_LEFT);
         else
-            StyleConstants.setAlignment(a, StyleConstants.ALIGN_CENTER);
+           // StyleConstants.setAlignment(a, StyleConstants.ALIGN_CENTER);
+        	StyleConstants.setAlignment(a, StyleConstants.ALIGN_LEFT);
         StyleConstants.setForeground(a, c.getTextColor());
         final Font font = c.getFont();
         setFontAttributes(a, font,c);
