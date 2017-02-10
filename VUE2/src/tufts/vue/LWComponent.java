@@ -66,8 +66,7 @@ public class LWComponent
     implements VueConstants, XMLUnmarshalListener
 {
     protected static final org.apache.log4j.Logger Log = org.apache.log4j.Logger.getLogger(LWComponent.class);
-    
-    public boolean WrapText = false; // under development
+
     public enum ChildKind {
 
         /** Include any and all children in the traversable LW hierarchy, such as slides and their

@@ -52,7 +52,7 @@ public class LWLink extends LWComponent
 
     private static boolean PruneControlsEnabled = false;
     private static boolean DisplayLabels = true;
-   // final static boolean WrapText = true; // under development
+    
     // Ideally, we want this to be false: it's a more accurate representation of
     // what's displayed: the control points only show up when selected.
     private static final boolean IncludeControlPointsInBounds = false;
