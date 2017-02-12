@@ -1,4 +1,4 @@
-Last modified Feb. 10, 2017.
+Last modified Feb. 12, 2017.
 
 VUE slightly modified to suit my personal tastes.
 
@@ -86,6 +86,20 @@ Recent changes or additions:
 * Formerly, the text caret couldn't be seen on dark backgrounds.  To fix that, the text caret is given the same color as the current bubble or link's text color.
 
 * I attempted to make word wrap work inside bubbles.  I got surprisingly far with it, but, unfortunately, word-wrapping went away when I loaded a saved map.  And also when changing the text color.  So, I reverted those changes, since wordwrap won't be very useful until I figure out how to fix all that.
+
+
+----
+
+Apollia's notes from Feb. 12, 2017:
+
+Recent changes or additions:
+
+* A very nice improvement - now you can quickly scroll through your map tabs using your mouse wheel!
+    
+Uses almost unchanged code from here:
+
+http://stackoverflow.com/a/38463104
+http://stackoverflow.com/questions/38463047/use-mouse-to-scroll-through-tabs-in-jtabbedpane
 
 
 Warning: This might be glitchy.  I'm still mostly a Java newbie.
