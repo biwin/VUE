@@ -94,12 +94,28 @@ Apollia's notes from Feb. 12, 2017:
 
 Recent changes or additions:
 
-* A very nice improvement - now you can quickly scroll through your map tabs using your mouse wheel!
-    
+* Now you can quickly scroll through your map tabs using your mouse wheel!
+
 Uses almost unchanged code from here:
 
 http://stackoverflow.com/a/38463104
 http://stackoverflow.com/questions/38463047/use-mouse-to-scroll-through-tabs-in-jtabbedpane
+
+
+* It's now possible to drag and drop tabs to reorder them!
+
+Uses unchanged code from here:
+
+http://stackoverflow.com/a/61982
+
+And I replaced the convertTab method from the preceding link with:
+http://stackoverflow.com/a/8610017
+
+Both of those links go to:
+http://stackoverflow.com/questions/60269/how-to-implement-draggable-tab-using-java-swing
+
+
+* Possibly fixed the longstanding problem of mistaken-seeming "Failed to load map" dialog boxes popping up when loading a map (which always seemed mistaken because it always looked like the map loaded just fine).  All I had to do was comment out two lines in MapTabbedPane.java.
 
 
 Warning: This might be glitchy.  I'm still mostly a Java newbie.
