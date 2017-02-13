@@ -52,9 +52,9 @@ It inserts dates in this format: 2017-01-23 14:55:49
 
 It works on bubbles or links, but for some reason, doesn't work on text blocks.  (Which I didn't fix, because I never use text blocks anyway.)
 
-If no node or link is selected, or if more than one is selected, a new bubble is created, containing the current date/time.
+If no bubble or link is selected, or if more than one is selected, a new bubble is created, containing the current date/time.
 
-If one node or link is selected, the current date/time is added to the label of the selected bubble or link, either at the end of the label, or wherever the caret currently is.
+If one bubble or link is selected, the current date/time is added to the label of the selected bubble or link, either at the end of the label, or wherever the caret currently is.
 
 
 * Changed the original dangerous behavior of ESC while editing a bubble label or link label.
@@ -104,18 +104,18 @@ http://stackoverflow.com/questions/38463047/use-mouse-to-scroll-through-tabs-in-
 
 * It's now possible to drag and drop tabs to reorder them!
 
-Uses unchanged code from here:
+Uses code from here:
 
 http://stackoverflow.com/a/61982
 
-And I replaced the convertTab method from the preceding link with:
+Which is unchanged except for replacing the convertTab method with an unchanged copy of the code from this post:
 http://stackoverflow.com/a/8610017
 
 Both of those links go to:
 http://stackoverflow.com/questions/60269/how-to-implement-draggable-tab-using-java-swing
 
 
-* Possibly fixed the longstanding problem of mistaken-seeming "Failed to load map" dialog boxes popping up when loading a map (which always seemed mistaken because it always looked like the map loaded just fine).  All I had to do was comment out two lines in MapTabbedPane.java.
+* Possibly fixed the longstanding problem of mistaken-seeming "Failed to load map" dialog boxes sometimes popping up when loading a map (which always seemed mistaken because it always looked like the map loaded just fine).  All I had to do was comment out two lines in MapTabbedPane.java.
 
 
 Warning: This might be glitchy.  I'm still mostly a Java newbie.
