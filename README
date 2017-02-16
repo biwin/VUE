@@ -1,4 +1,4 @@
-Last modified Feb. 12, 2017.
+Last modified Feb. 16, 2017.
 
 VUE slightly modified to suit my personal tastes.
 
@@ -118,10 +118,32 @@ http://stackoverflow.com/questions/60269/how-to-implement-draggable-tab-using-ja
 * Possibly fixed the longstanding problem of mistaken-seeming "Failed to load map" dialog boxes sometimes popping up when loading a map (which always seemed mistaken because it always looked like the map loaded just fine).  All I had to do was comment out two lines in MapTabbedPane.java.
 
 
+----
+
+Apollia's notes from Feb. 16, 2017:
+
+Recent changes or additions:
+
+* I commented out the code that caused VUE at startup to connect to vue.tufts.edu to look for updated versions of itself.
+
+* I commented out and/or modified the worrying-looking code that seemed to be causing VUE to send every web URL the user added to a VUE map to the website open.thumbshots.org.
+
+
+* I was dismayed to find that my copy of Java was, by default, giving all permissions to locally-run Java software.
+
+So, I tried to make a Java security policy file for VUE, to try to stop Java from being so darn permissive.  I also made some shell scripts to launch VUE using that policy file.
+
+That policy file requires the Pro-Grade library - http://pro-grade.sourceforge.net/ - because astonishingly, without that, Java policies only have a command to "grant" permissions, but not "deny" them!
+
+Unfortunately, I still haven't figured out how to block absolutely everything I might possibly want to block, since whether or not I use Pro-Grade, my policy file still fails to block some worrying-looking things.
+
+
+----
+
 Warning: This might be glitchy.  I'm still mostly a Java newbie.
 
-End of notes by Apollia.
 
+End of notes by Apollia.
 -----
 Text not by Apollia:
 -----
