@@ -1,0 +1,107 @@
+// 12:06:43 02/15/2017.  Java policy file for VUE by Apollia.
+//
+// 16:34:02 02/15/2017.  Converted into a Pro-Grade policy file.
+// http://pro-grade.sourceforge.net/
+//
+// By default, my copy of Java alarmingly granted all permissions to Java
+// software.  So, I made this policy file to try to stop Java from being so
+// darn permissive with VUE.
+//
+//
+// 02:13:03 02/16/2017.  Unfortunately, it seems Java''s permission-denying
+// capabilities are still alarmingly incomplete, because somehow this policy
+// (whether or not I use Pro-Grade) fails to block some
+// java.net.SocketPermissions which attempt to "resolve" URLs like vue.tufts.edu
+// or open.thumbshot.org.
+//
+// So, to get rid of those, I had to edit VUE itself.
+//
+// I commented out the VUE version check code which connected to vue.tufts.edu.
+// And also commented out what I think was some sort of web page 
+// thumbnail-making code, which connected to open.thumbshot.org and gave that
+// site the URL of any web page the user added to a VUE map.
+//
+// However, there easily might be other internet-related things in VUE that 
+// still need to be commented out.
+//
+//
+// I also couldn''t figure out how to get rid of the worrying lines (visible
+// when using the Java policy debugger) that say:
+//
+// access: access allowed ("java.lang.reflect.ReflectPermission" "suppressAccessChecks")
+//
+// I still don''t know where that''s coming from or how to stop it, or why Java
+// fails to block it even after I went to all this trouble to figure out how to
+// add a policy file, in the hope of being able to block absolutely everything
+// worrying that I haven''t manually enabled.
+//
+//
+// At least the policy seems to successfully block other internet-related actions.
+//
+// But, as expected, the policy doesn''t block VUE from being able to launch
+// local scripts which do something internet-related.  (Which I actually don''t
+// mind.)
+//
+// So, that means VUE can still execute the "for_vue---weburl_opener" local
+// shell command, which can be a symlink to your favorite web browser (or
+// something else), or a script which does anything else you want.
+//
+// And also, if the "for_vue---filepath_opener" shell command opens a path
+// with the Rox-Filer file manager, and that path happens to be to an
+// internet-related script, or to a folder containing a Rox-Filer AppRun
+// script which does something internet-related, that is another way that doing
+// something in VUE could do something internet-related.
+//
+//
+// Another big problem with Java''s permission-denying capabilities is the
+// astonishing lack of a "deny" command.
+//
+// I mistakenly assumed that because Java policy files had a "grant" command
+// (which reminded me pleasantly of Apache web server .htaccess files), that
+// they also must have "deny".
+//
+// But I actually had to install a separate library called Pro-Grade to obtain
+// what seems to me like it ought to be core functionality of Java.
+
+
+priority "grant";
+
+deny {
+	permission java.security.AllPermission;
+	
+	// 02:43:23 02/16/2017.  This line somehow does nothing:
+	// permission java.net.SocketPermission "vue.tufts.edu", "resolve";
+};
+
+
+grant {
+	permission java.io.FilePermission "<<ALL FILES>>", "read,write,execute,delete";
+	permission java.util.PropertyPermission "*", "read";
+	
+	permission java.lang.RuntimePermission "getenv.TERM";
+	permission java.lang.RuntimePermission "getenv.SSH_TERM";
+	permission java.lang.RuntimePermission "preferences";
+	permission java.util.PropertyPermission "user.language", "write";
+	
+	permission java.lang.RuntimePermission "getenv.JAVA_ARCH";
+	permission java.lang.RuntimePermission "getenv.HOST";
+	permission java.lang.RuntimePermission "getenv.HOSTNAME";
+	permission java.lang.RuntimePermission "getenv.VUEUSERHOME";
+	
+	permission java.awt.AWTPermission "showWindowWithoutWarningBanner";
+	// 11:20:07 02/15/2017.  The preceding line stops the icon of a yellow or grey triangle
+	// with an exclamation point from appearing all over the place.
+	//
+	// 11:22:54 02/15/2017.  Getting rid of that icon also stops the slowdown of the
+	// loading of VUE menus.
+	
+	permission java.awt.AWTPermission "setWindowAlwaysOnTop";
+	
+	permission java.lang.RuntimePermission "accessClassInPackage.com.sun.org.apache.xerces.internal.parsers";
+	
+	permission java.awt.AWTPermission "accessClipboard";
+	
+	// 02:12:02 02/16/2017.  Not sure if these are necessary or not.
+	permission java.lang.RuntimePermission "modifyThreadGroup";
+	permission java.lang.RuntimePermission "getClassLoader";
+};

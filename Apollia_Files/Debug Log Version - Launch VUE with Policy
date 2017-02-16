@@ -1,0 +1,16 @@
+#!/bin/sh
+
+java -cp "/root/apbin/Pro-Grade/pro-grade-master/target/pro-grade.jar":"/root/apbin/VUE/VUE.jar" \
+-Djava.security.manager=net.sourceforge.prograde.sm.ProGradeJSM \
+-Djava.security.debug="access,stack,domain,failure" \
+-Djava.security.policy=="/root/00-Construction/VUE/Apollia_Files/java.policy" \
+-DsocksProxyHost=127.0.0.1 \
+tufts.vue.VUE \
+"/root/apmaps/Maps/Testmap.vue" \
+2>&1 | tee /tmp/Debug_Log---VUE_With_Java_Policy.txt
+
+
+# 03:50:25 02/16/2017.  The log gets very big very fast.  Can get to be around
+# 50 MB in maybe less than 5 minutes.  It could probably quickly fill up
+# your RAM disk if you forget it's there while you're using VUE.
+
