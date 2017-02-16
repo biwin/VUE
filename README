@@ -124,12 +124,12 @@ Apollia's notes from Feb. 16, 2017:
 
 Recent changes or additions:
 
-* I commented out the code that caused VUE at startup to connect to vue.tufts.edu to look for updated versions of itself.
+* I commented out the code that caused VUE at startup to connect to vue.tufts.edu to look for an updated version of itself.
 
 * I commented out and/or modified the worrying-looking code that seemed to be causing VUE to send every web URL the user added to a VUE map to the website open.thumbshots.org.
 
 
-* I was dismayed to find that my copy of Java was, by default, giving all permissions to locally-run Java software.
+* I was dismayed to find that my copy of Java seemed to be, by default, granting all permissions to any Java software I ran.
 
 So, I tried to make a Java security policy file for VUE, to try to stop Java from being so darn permissive.  I also made some shell scripts to launch VUE using that policy file.
 
