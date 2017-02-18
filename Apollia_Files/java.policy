@@ -101,6 +101,12 @@ grant {
 	
 	permission java.awt.AWTPermission "accessClipboard";
 	
+	// 12:36:42 02/17/2017.  This one seems to be necessary, since without it,
+	// some images can fail to be redrawn (even though they were successfully
+	// loaded when the map was first loaded).
+	
+	permission java.lang.RuntimePermission "modifyThread";
+	
 	// 02:12:02 02/16/2017.  Not sure if these are necessary or not.
 	permission java.lang.RuntimePermission "modifyThreadGroup";
 	permission java.lang.RuntimePermission "getClassLoader";
