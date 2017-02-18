@@ -1,4 +1,4 @@
-Last modified Feb. 16, 2017.
+Last modified Feb. 18, 2017.
 
 VUE slightly modified to suit my personal tastes.
 
@@ -137,6 +137,16 @@ That policy file requires the Pro-Grade library - http://pro-grade.sourceforge.n
 
 Unfortunately, I still haven't figured out how to block absolutely everything I might possibly want to block, since whether or not I use Pro-Grade, my policy file still fails to block some worrying-looking things.
 
+
+----
+
+Apollia's notes from Feb. 18, 2017:
+
+Recent changes or additions:
+
+* Now Ctrl-T makes a new tab with a new map, instead of inserting a new textblock.  (Ctrl-Shift-N no longer creates a new map.)
+
+* Added a line (and comments) to the Java security policy.  That line seems to make it possible for images to get redrawn.  Otherwise, they vanish after a while, even though they appear when you first load a map.
 
 ----
 
