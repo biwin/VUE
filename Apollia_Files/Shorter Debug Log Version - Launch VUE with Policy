@@ -6,8 +6,12 @@ java -cp "/root/apbin/Pro-Grade/pro-grade-master/target/pro-grade.jar":"/root/ap
 -Djava.security.policy=="/root/00-Construction/VUE/Apollia_Files/java.policy" \
 -DsocksProxyHost=127.0.0.1 \
 tufts.vue.VUE \
-"/root/apmaps/Maps/Testmap.vue" \
+"/root/apmaps/Maps/Testmap.vue" "$@" \
 2>&1 | tee /tmp/Shorter_Debug_Log---VUE_With_Java_Policy.txt
 
 
 # 12:21:17 02/16/2017.  This launcher results in a smaller, less informative debug log.
+
+# 12:13:51 02/19/20176.  For some reason, putting just "$@" without the Testmap argument
+# causes an error to pop up, if you run this script without arguments.
+

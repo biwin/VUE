@@ -7,8 +7,11 @@ java -cp "/root/apbin/Pro-Grade/pro-grade-master/target/pro-grade.jar":"/root/ap
 -Djava.security.manager=net.sourceforge.prograde.sm.PolicyFileGeneratorJSM \
 -Dprograde.generated.policy=/tmp/For_VUE---generated.java.policy \
 tufts.vue.VUE \
-"/root/apmaps/Maps/Testmap.vue" \
+"/root/apmaps/Maps/Testmap.vue" "$@" \
 2>&1 | tee /tmp/Log---VUE_with_ProGrade_Policy_Generator.txt
 
 
 # -Djava.security.policy=="/root/00-Construction/VUE/Apollia_Files/java.policy" \
+
+# 12:13:51 02/19/20176.  For some reason, putting just "$@" without the Testmap argument
+# causes an error to pop up, if you run this script without arguments.
