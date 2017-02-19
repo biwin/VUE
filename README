@@ -1,13 +1,15 @@
 Last modified Feb. 18, 2017.
 
-VUE slightly modified to suit my personal tastes.
+VUE slightly modified to suit my (Apollia's) personal tastes.
 
 Warning: This might be glitchy.  I'm still mostly a Java newbie.
 
 
-Apollia's notes from Jan. 7, 2017: 
+---------
+Changelog
+---------
 
-Here's what I managed to do so far:
+Jan. 7, 2017:  Here's what I managed to do so far:
 
 * Turned on debug mode.
 
@@ -39,9 +41,7 @@ Reminds me a little of HyperCard.  http://www.loper-os.org/?p=568
 
 ----
 
-Apollia's notes from Jan. 23, 2017:
-
-Recent changes or additions:
+Jan. 23, 2017:
 
 * A new submenu of the Edit menu called "Etc."  I moved the dangerous "Cut" and "Delete" menu items into it.
 
@@ -73,9 +73,7 @@ And images dragged into bubbles also won't be shrunk down.
 
 ----
 
-Apollia's notes from Feb. 10, 2017:
-
-Recent changes or additions:
+Feb. 10, 2017:
 
 * Formerly, clicking a bubble to edit it would unnecessarily highlight all text.  Now, VUE automatically unhighlights that text, so fewer clicks are necessary to edit a bubble.
 
@@ -90,9 +88,7 @@ Recent changes or additions:
 
 ----
 
-Apollia's notes from Feb. 12, 2017:
-
-Recent changes or additions:
+Feb. 12, 2017:
 
 * Now you can quickly scroll through your map tabs using your mouse wheel!
 
@@ -120,9 +116,7 @@ http://stackoverflow.com/questions/60269/how-to-implement-draggable-tab-using-ja
 
 ----
 
-Apollia's notes from Feb. 16, 2017:
-
-Recent changes or additions:
+Feb. 16, 2017:
 
 * I commented out the code that caused VUE at startup to connect to vue.tufts.edu to look for an updated version of itself.
 
@@ -140,13 +134,18 @@ Unfortunately, I still haven't figured out how to block absolutely everything I 
 
 ----
 
-Apollia's notes from Feb. 18, 2017:
-
-Recent changes or additions:
+Feb. 18, 2017:
 
 * Now Ctrl-T makes a new tab with a new map, instead of inserting a new textblock.  (Ctrl-Shift-N no longer creates a new map.)
 
 * Added a line (and comments) to the Java security policy.  That line seems to make it possible for images to get redrawn.  Otherwise, they vanish after a while, even though they appear when you first load a map.
+
+----
+
+Feb. 19, 2017:
+
+* Now my VUE launcher scripts can accept arguments, so you can open the maps
+of your choice at startup.
 
 ----
 
