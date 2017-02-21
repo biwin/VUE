@@ -1,6 +1,6 @@
-Last modified Feb. 18, 2017.
+Last modified Feb. 21, 2017.
 
-VUE slightly modified to suit my (Apollia's) personal tastes.
+VUE modified to suit my (Apollia's) personal tastes.
 
 Warning: This might be glitchy.  I'm still mostly a Java newbie.
 
@@ -146,6 +146,12 @@ Feb. 19, 2017:
 
 * Now my VUE launcher scripts can accept arguments, so you can open the maps
 of your choice at startup.
+
+----
+
+Feb. 21, 2017:
+
+* Now, URLs you dragdrop into a VUE map are left alone and inserted verbatim.  Newlines aren't inserted into them anymore, and they don't get abbreviated at all.
 
 ----
 
