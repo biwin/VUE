@@ -171,7 +171,7 @@ When I built VUE with Ant, the Categories dropdown somehow went back to its usua
 
 I actually have to duplicate my entire VUE folder to build with Ant, because once, when I ran Ant in the same VUE folder Eclipse was using, Eclipse got totally messed up.
 
-Would be nice if I knew where Eclipse puts things it builds, but I couldn't figure that out, so I just use Ant.
+Would be nice if I knew where Eclipse puts things it builds, but I couldn't figure that out, so I just use Ant to build VUE.
 
 ----
 
