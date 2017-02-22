@@ -575,7 +575,7 @@ public class WidgetStack extends Widget
             if (!handlePresetProperty(HIDDEN_KEY)) {
                 // not hidden by default
                 setBoolean(widget, HIDDEN_KEY, false);
-            }
+            } 
 
             handlePresetProperty(REFRESH_ACTION_KEY);
             // shouldn't we be handling all of these?  DataSourceViewer current sets help & misc actions,
