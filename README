@@ -151,6 +151,8 @@ of your choice at startup.
 
 Feb. 21, 2017:
 
+* Now it's possible to rename layers while using VUE in Puppy Linux.
+
 * Now, URLs you dragdrop into a VUE map are left alone and inserted verbatim.  Newlines aren't inserted into them anymore, and they no longer get abbreviated at all.
 
 ----
