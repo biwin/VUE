@@ -155,6 +155,12 @@ Feb. 21, 2017:
 
 * Now, URLs you dragdrop into a VUE map are left alone and inserted verbatim.  Newlines aren't inserted into them anymore, and they no longer get abbreviated at all.
 
+* I made the Layers panel's colors match my dark desktop theme better.
+
+* Also changed some other GUI colors.  The gradient in the subtitles of the Info panel is now darker.  Not sure what my other changes did.
+
+* Somehow, changing the Layers panel broke the Categories dropdown in the Info panel.  Java is now one of my least favorite programming languages, below Python.
+
 ----
 
 Warning: This might be glitchy.  I'm still mostly a Java newbie.
