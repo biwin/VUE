@@ -461,7 +461,8 @@ public class WidgetStack extends Widget
             	
                 String localKey = "gui.widget.title." + localName;                
                 GUI.init(mTitle, localKey);
-                mTopColor = VueResources.getColor(localKey + ".background.top");
+               // mTopColor = VueResources.getColor(localKey + ".background.top");
+                mTopColor = Color.black;
                
                 if (mTopColor != null) {
                     Color botColor = VueResources.getColor(localKey + ".background.bottom", BottomGradient);
@@ -487,7 +488,7 @@ public class WidgetStack extends Widget
             // TODO: merge with DockWindow code for same
             mIcon = new GUI.IconicLabel(DownArrowChar,
                                         16, // point-size
-                                        Color.white,
+                                        Color.green,
                                         15, // fixed width
                                         16); // fixed height
             //if (isMac)
@@ -575,7 +576,7 @@ public class WidgetStack extends Widget
             if (!handlePresetProperty(HIDDEN_KEY)) {
                 // not hidden by default
                 setBoolean(widget, HIDDEN_KEY, false);
-            } 
+            }
 
             handlePresetProperty(REFRESH_ACTION_KEY);
             // shouldn't we be handling all of these?  DataSourceViewer current sets help & misc actions,
