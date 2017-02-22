@@ -163,6 +163,18 @@ Feb. 21, 2017:
 
 ----
 
+Feb. 22, 2017:
+
+* Didn't change anything else yet.  But, I discovered that the Categories dropdown actually wasn't totally broken in the copy of VUE I built outside of Eclipse with Ant.
+
+When I built VUE with Ant, the Categories dropdown somehow went back to its usual unreliable but somewhat functional enough behavior.
+
+I actually have to duplicate my entire VUE folder to build with Ant, because once, when I ran Ant in the same VUE folder Eclipse was using, Eclipse got totally messed up.
+
+Would be nice if I knew where Eclipse puts things it builds, but I couldn't figure that out, so I just use Ant.
+
+----
+
 Warning: This might be glitchy.  I'm still mostly a Java newbie.
 
 
