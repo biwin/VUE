@@ -1,4 +1,4 @@
-Last modified Feb. 21, 2017.
+Last modified Feb. 22, 2017.
 
 VUE modified to suit my (Apollia's) personal tastes.
 
@@ -175,6 +175,18 @@ Would be nice if I knew where Eclipse puts things it builds, but I couldn't figu
 
 
 * Now Ctrl-3 brings up the Panner (which I use a lot) instead of the Content panel, which I never use.
+
+
+* Using ImageMagick 7.0.5-0, I changed the colors of maybe all images in VUE to make VUE match my personal desktop theme even better.  The colors range from semi-bright gold to dark goldenrod.  (Might look orangish or brown, depending on your monitor or system display settings.)
+
+
+* The toolbar's highlight is now a brown gradient.
+
+
+* The "focus indicator" (a formerly white box at the lower right of the VUE window) is now black.
+
+
+* I also finally figured out how to change the colors of the title bar of panels (such as Panner, or Layers), including the text color!
 
 ----
 
