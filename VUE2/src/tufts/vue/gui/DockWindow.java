@@ -89,8 +89,46 @@ public class DockWindow
     static DockRegion MainDock;
 
     private static final Color
-        TopGradientColor = VueResources.getColor("gui.dockWindow.title.background.top"),
-        BottomGradientColor = VueResources.getColor("gui.dockWindow.title.background.bottom");
+       // TopGradientColor = Color.decode("#744200"),
+      //  BottomGradientColor = Color.decode("#522000");
+    
+    	// Apollia's note, Feb. 22, 2017, 11:23 PM.  AT LAST!!!!!!!!!!!!!!!
+    	// I finally figured out how to change the colors of 
+    	// the title bar of panels!!!!!!!!!!! 
+    	// Just had to edit these gradient colors:
+    
+    	TopGradientColor = Color.decode("#522000"),
+    	BottomGradientColor = Color.decode("#744200");
+    
+    	// Apollia's note continued:
+    	// As for the font color, I found that by:
+    	//
+    	// 		1. Making a screenshot
+    	//
+    	//		2. In the paint program mtPaint, I held down the Ctrl key and clicked
+    	// the panel title text, which selected that color and enabled me to see its
+    	// hex code in mtPaint's Colour Editor.
+    	//
+    	//		3. In Eclipse, I searched for "#3A5E9E", the original blue color.
+    	//		   Wasn't sure I'd find anything.
+    	//
+    	//
+    	//		4. But happily, that search yielded two files:
+    	//
+    	//			* VueResources__Win.properties
+    	//			* VueResources_en__Win.properties
+    	//
+    	//			I only had to edit the first one to change the text color!
+    	//
+    	//
+    	//		5. In VueResources__Win.properties, I set 
+    	//         "gui.dockWindow.title.foreground" equal to a
+    	//		   new hex color code.
+    
+    
+    	//TopGradientColor = VueResources.getColor("gui.dockWindow.title.background.top"),
+	
+        //BottomGradientColor = VueResources.getColor("gui.dockWindow.title.background.bottom");
     
     
     private final static String NORTH_WEST = "northWest";
