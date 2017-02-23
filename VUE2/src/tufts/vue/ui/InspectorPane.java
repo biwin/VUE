@@ -1638,7 +1638,7 @@ public class InspectorPane extends WidgetStack
             }
             else
             {
-            	labelValue.setBackground(Color.white);
+            	labelValue.setBackground(Color.black);
             	labelValue.setBorder(border);
             	labelValue.setEditable(true);
             }
