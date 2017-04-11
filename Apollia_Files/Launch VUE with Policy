@@ -1,0 +1,12 @@
+#!/bin/sh
+
+java -cp "/root/apbin/Pro-Grade/pro-grade-master/target/pro-grade.jar":"/root/apbin/VUE/VUE.jar" \
+-Djava.security.manager=net.sourceforge.prograde.sm.ProGradeJSM \
+-Djava.security.policy=="/root/00-Construction/VUE/Apollia_Files/java.policy" \
+-DsocksProxyHost=127.0.0.1 \
+tufts.vue.VUE \
+"/root/apmaps/Maps/Testmap.vue" "$@"
+
+
+# 12:13:51 02/19/20176.  For some reason, putting just "$@" without the Testmap argument
+# causes an error to pop up, if you run this script without arguments.

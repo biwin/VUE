@@ -306,7 +306,9 @@ public class SearchTextField extends JTextField implements FocusListener {
         // textField.setMargin(noInsets);
 
         createPopupMenu(isWindows);
-
+        textField.setBackground(Color.decode("#123200"));
+        textField.setBorder(null);
+        textField.setForeground(Color.decode("#00AA00"));
         textField.putClientProperty("JTextField.variant", "search");
         textField.putClientProperty("JTextField.Search.FindPopup", this.popup);
         // use JTextField.Search.FindAction for an action instead of a pop-up when the spyglass is clicked
@@ -327,6 +329,7 @@ public class SearchTextField extends JTextField implements FocusListener {
         subTextField.setBorder(null);
         subTextField.setText(VueResources.local("search.text.default"));
         subTextField.setForeground(Color.gray);
+        
         subTextField.setPreferredSize(new Dimension(135,18));
         textField.setPreferredSize(new Dimension(180,23)); // TODO FIX HARDCODE SIZE
         Insets noInsets = new Insets(0, 15, 0, 25);

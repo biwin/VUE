@@ -113,6 +113,29 @@ public class VueMenuBar extends javax.swing.JMenuBar
     public static JMenu layoutMenu = null;
     public static JMenu linkMenu = null;
     public static JMenu playbackMenu = null;
+    
+    // Added by Apollia, Jan. 21, 2017, 8:33 AM.
+    public static JMenu etcMenu=null;
+    	// This is a submenu of the Edit menu.
+    	//
+    	// I made it because I didn't like having the dangerous
+    	// Cut and Delete menu items in the main Edit menu.
+    
+    // End of Added by Apollia, Jan. 21, 2017, 8:33 AM.
+    
+    
+    // Added by Apollia, Jan. 21, 2017, 9:23 AM.
+    public static JMenu insertBubbleOrTextMenu=null;
+    	// Another submenu of the Edit menu.
+    	//
+    	// I made this because I needed a place to put a new "Insert Date/Time"
+    	// action, which inserts the current date/time when you press F5.
+    	// (Or, if no bubble or link is selected, a new bubble is
+    	// created with the current/date time already in it.
+    
+    // End of Added by Apollia, Jan. 21, 2017, 9:23 AM.
+    
+    
     public boolean isMenuEnableFontFlg = false;
     // this may be created multiple times as a workaround for the inability
     // to support a single JMenuBar for the whole application on the Mac
@@ -270,6 +293,24 @@ public class VueMenuBar extends javax.swing.JMenuBar
         final JMenu editMenu = makeMenu(VueResources.getString("menu.edit"));
         final JMenu viewMenu = makeMenu(VueResources.getString("menu.view"));
         final JMenu formatMenu = makeMenu(VueResources.getString("menu.format"));
+        
+        
+        // Added by Apollia, Jan. 21, 2017, 9:29 AM.
+        
+        insertBubbleOrTextMenu = makeMenu(VueResources.getString("menu.insertbubbleortext"));
+        insertBubbleOrTextMenu.setEnabled(true);
+        
+        // End of Added by Apollia, Jan. 21, 2017, 9:29 AM.
+        
+        
+        
+        // Jan. 21, 2017, 8:41 AM.  Added by Apollia.
+        
+        etcMenu = makeMenu(VueResources.getString("menu.etc"));
+        etcMenu.setEnabled(true);
+        
+        // End of Jan. 21, 2017, 8:41 AM.  Added by Apollia.
+        
         
         transformMenu = makeMenu(VueResources.getString("menu.font"));
         transformMenu.setEnabled(false);
@@ -612,12 +653,27 @@ public class VueMenuBar extends javax.swing.JMenuBar
         editMenu.add(Actions.Undo);
         editMenu.add(Actions.Redo);
         editMenu.addSeparator();
-        editMenu.add(Actions.Cut);
+       
+        // Jan. 21, 2017, 2:42 PM.  Added by Apollia.
+        editMenu.add(insertBubbleOrTextMenu);
+        insertBubbleOrTextMenu.add(Actions.InsertCurrentDateTime);
+        
+        // End of Jan. 21, 2017, 2:42 PM.  Added by Apollia.
+        
         editMenu.add(Actions.Copy);
         editMenu.add(Actions.Paste);
+        
         editMenu.add(Actions.Duplicate);
         editMenu.add(Actions.Rename);
-        editMenu.add(Actions.Delete);                        
+        
+        
+        // Jan. 21, 2017, 8:36 AM.  Added by Apollia.
+        editMenu.add(etcMenu);
+        etcMenu.add(Actions.Cut);
+        etcMenu.add(Actions.Delete);
+       
+        // End of Jan. 21, 2017, 8:36 AM.  Added by Apollia.
+        
         editMenu.addSeparator();
         editMenu.add(Actions.SelectAll);
         editMenu.add(Actions.SelectAllNodes);
@@ -625,6 +681,7 @@ public class VueMenuBar extends javax.swing.JMenuBar
         editMenu.add(Actions.ExpandSelection);
         editMenu.add(Actions.ShrinkSelection);
         editMenu.add(Actions.Reselect);
+        editMenu.add(Actions.Deselect);
         editMenu.add(Actions.DeselectAll);
         if (!tufts.Util.isMacPlatform() || VUE.isApplet())
         {   editMenu.addSeparator();
@@ -1033,7 +1090,7 @@ public class VueMenuBar extends javax.swing.JMenuBar
         windowMenu.add(Actions.NotesAction);
         windowMenu.addSeparator();
 //      if (VUE.getContentDock()!= null && !VUE.isApplet()){
-            windowMenu.add(createWindowItem(VUE.getContentDock(), KeyEvent.VK_3, VueResources.getString("dockWindow.contentPanel.title")));
+            windowMenu.add(createWindowItem(VUE.getContentDock(), 0, VueResources.getString("dockWindow.contentPanel.title")));
             if (!VUE.isApplet())
             	windowMenu.add(Actions.ResourcesAction);
             windowMenu.add(Actions.DatasetsAction);
@@ -1042,7 +1099,11 @@ public class VueMenuBar extends javax.swing.JMenuBar
 
 //            OntologyBrowser.getBrowser().initializeBrowser(false, null);
 //      }
-
+        // Apollia's note, FEb. 22, 2017, 1:q14 PM EST.
+        // Assigned Ctrl-3 to Panner (which I use a lot)
+        // instead of Content (which I never use).
+        if (VUE.getPannerDock() !=null && !VUE.isApplet())	
+            	windowMenu.add(createWindowItem(VUE.getPannerDock(), KeyEvent.VK_3, VueResources.getString("menu.windows.panner")));
         if (VUE.getInteractionToolsDock()!= null)
             windowMenu.add(createWindowItem(VUE.getInteractionToolsDock(), KeyEvent.VK_4, VueResources.getString("dockWindow.interactionTools.title")));            
         if (VUE.getLayersDock() != null)	
@@ -1051,8 +1112,6 @@ public class VueMenuBar extends javax.swing.JMenuBar
             windowMenu.add(createWindowItem(VUE.getMapInfoDock(), KeyEvent.VK_6, VueResources.getString("menu.windows.mapinfo")));
         if (VUE.getOutlineDock() !=null && !VUE.isApplet())	
         	windowMenu.add(createWindowItem(VUE.getOutlineDock(), KeyEvent.VK_7, VueResources.getString("menu.windows.outline")));
-        if (VUE.getPannerDock() !=null && !VUE.isApplet())	
-        	windowMenu.add(createWindowItem(VUE.getPannerDock(), 0, VueResources.getString("menu.windows.panner")));
         if (VUE.getPresentationDock() !=null)	
         	windowMenu.add(createWindowItem(VUE.getPresentationDock(), KeyEvent.VK_8, VueResources.getString("menu.windows.pathways")));
         if (VUE.getMetadataSearchMainGUI()!= null)

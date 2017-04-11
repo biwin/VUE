@@ -380,7 +380,7 @@ public class LayersUI extends tufts.vue.gui.Widget implements LWComponent.Listen
         		 g.drawLine(10, 5, 10, 25);         		
         	 }        	
         };  
-        panel.setForeground(Color.gray);
+        panel.setForeground(Color.black);
         panel.setPreferredSize(new Dimension(10,25));         
         mToolbar.add(panel,gBC);  
 //         if (DEBUG.Enabled) {
@@ -833,14 +833,18 @@ public class LayersUI extends tufts.vue.gui.Widget implements LWComponent.Listen
     }
     
     private final Color AlphaWhite = new Color(255,255,255,128);
+   
+    private static final Color ActiveBG = Color.decode("#123200");
+ //   private static final Color ActiveBG = VueResources.getColor("layerUI.activeLayer.background", Color.decode("#123200"));
     
-    private static final Color ActiveBG = VueResources.getColor("layerUI.activeLayer.background", Color.blue);
-    
-    private final Color IncludedBG = Util.alphaMix(AlphaWhite, VueConstants.COLOR_SELECTION);
+    private final Color IncludedBG = Color.black;
+   // private final Color IncludedBG = Util.alphaMix(AlphaWhite, Color.black);
     //private final Color IncludedBG = VueConstants.COLOR_SELECTION.darker();
     //private final Color IncludedBG = new Color(128,128,255,128);
     
-    private final Color SelectedBG = VueConstants.COLOR_SELECTION.brighter();
+    private final Color SelectedBG = Color.decode("#123200");
+    
+    //private final Color SelectedBG = VueConstants.COLOR_SELECTION.brighter();
     
     private void indicateActiveLayers(Collection<LWContainer> parents) {
     	
@@ -1216,6 +1220,8 @@ public class LayersUI extends tufts.vue.gui.Widget implements LWComponent.Listen
         final Row row;
         
         public TextEdit(final Row row) {
+        	setBackground(Color.decode("#123200") );
+        	setForeground(Color.decode("#00AA00"));
             this.row = row;            
             setDragEnabled(false);
             setPreferredSize(MaxSize);
@@ -1231,7 +1237,8 @@ public class LayersUI extends tufts.vue.gui.Widget implements LWComponent.Listen
                         if (DEBUG.KEYS) Log.debug("KEY " + e);
                         if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                             //focusLost(null); // will be called again on actual focus-loss; could call setEditable(false);
-                            setEditable(false); // rely's on focusLost being generated
+                        	setEditable(true);
+                            //setEditable(false); // rely's on focusLost being generated
                         }
                     }
                 });
@@ -1274,7 +1281,8 @@ public class LayersUI extends tufts.vue.gui.Widget implements LWComponent.Listen
             inactiveBorder = GUI.makeSpace(activeBorder.getBorderInsets(this));
 
             //setOpaque(true);
-            setEditable(false);
+            setEditable(true);
+            //setEditable(false);
         }
 
         private boolean isConstructed() {
@@ -1283,7 +1291,9 @@ public class LayersUI extends tufts.vue.gui.Widget implements LWComponent.Listen
         
         @Override
         public void setEnabled(boolean enabled) {
-            setForeground(enabled ? Color.black : Color.gray);
+           // setForeground(enabled ? Color.black : Color.gray);
+        	setBackground(Color.decode("#123200") );
+        	setForeground(Color.decode("#00AA00"));
         }
 
         @Override
@@ -1295,7 +1305,7 @@ public class LayersUI extends tufts.vue.gui.Widget implements LWComponent.Listen
         
         public void focusGained(FocusEvent e) {}                    
         public void focusLost(FocusEvent e) {
-            setEditable(false);
+           // setEditable(false);
             setScrollOffset(0);
             row.layer.setLabel(getText().trim());
             // make sure if text is longer than fits into field, we scroll back to 0 at the left
@@ -1307,7 +1317,7 @@ public class LayersUI extends tufts.vue.gui.Widget implements LWComponent.Listen
             if (edit) {            	
                 setFocusable(true);
                 setBorder(activeBorder);
-                setBackground(Color.white);
+                setBackground(Color.decode("#123200"));
                 if (!TransparentHack)
                     setOpaque(true);
             } else {            	
@@ -1612,9 +1622,9 @@ public class LayersUI extends tufts.vue.gui.Widget implements LWComponent.Listen
             addMouseMotionListener(this);
             
             if (layer instanceof Layer)
-                defaultBackground = Color.white;// Changed for Background
+                defaultBackground = Color.black;// Changed for Background
             else
-                defaultBackground = Color.white; // debug/test case
+                defaultBackground = Color.black; // debug/test case
             setBackground(defaultBackground);
             
             if (true) {

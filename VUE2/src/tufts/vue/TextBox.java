@@ -403,6 +403,7 @@ public class TextBox extends JTextPane
         // this set's the "mark to the point" -- sets them to the same
         // location, thus clearing the selection.
         setCaretPosition(getCaretPosition());
+        setCaretColor(lwc.getTextColor() );
     }
 
     @Override
@@ -490,7 +491,8 @@ public class TextBox extends JTextPane
         if (TestHarness || c instanceof LWNode && ((LWNode)c).isTextNode())
             StyleConstants.setAlignment(a, StyleConstants.ALIGN_LEFT);
         else
-            StyleConstants.setAlignment(a, StyleConstants.ALIGN_CENTER);
+           // StyleConstants.setAlignment(a, StyleConstants.ALIGN_CENTER);
+        	StyleConstants.setAlignment(a, StyleConstants.ALIGN_LEFT);
         StyleConstants.setForeground(a, c.getTextColor());
         final Font font = c.getFont();
         setFontAttributes(a, font,c);
@@ -713,10 +715,20 @@ public class TextBox extends JTextPane
 
         //if (VueUtil.isAbortKey(e)) // check for ESCAPE for CTRL-Z or OPTION-Z if on mac
         if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-            e.consume();
+            // Modified by Apollia on Jan. 23, 2017, to prevent ESC from
+        	// deleting the text you added to a bubble label or
+        	// link label.
+        	//
+        	// Now, instead, the label is left alone, and the bubble
+        	// or link you were editing gets deselected.
+        	
+        	e.consume();
+
             getParent().remove(this); // will trigger a save (via focusLost)
-            super.setText(mUnchangedText); 
-            setSize(mUnchangedSize); // todo: won't be good enough if we ever resize the actual node as we type
+            LWSelection s = VUE.getSelection();
+            s.clear();
+        //    super.setText(mUnchangedText); 
+        //    setSize(mUnchangedSize); // todo: won't be good enough if we ever resize the actual node as we type
         } else if (isFinishEditKeyPress(e)) {
             keyWasPressed = true;
             e.consume();
@@ -758,7 +770,25 @@ public class TextBox extends JTextPane
     }
 
     public void focusGained(FocusEvent e)
-    {
+    {	
+    	// Apollia's note, Feb. 9, 2017, 7:33 PM EST.
+    	//
+    	// This gets rid of the unnecessary highlighting of all
+    	// text when you click on a bubble to edit it.
+    	//
+    	// Before, it took at least 3 clicks to get started editing
+    	// a bubble.  1st click to highlight the node, 2nd to go into edit
+    	// mode (which would annoyingly highlight all text), and 3rd
+    	// to clear the highlighting, and 4th (or more) in case your
+    	// 3rd (or more) clicks placed the caret someplace you 
+    	// didn't want to put it.
+    	//
+    	// Now, the 1st click selects the bubble, and the 2nd click 
+    	// puts it into edit mode, with the caret automatically
+    	// placed at the end of the bubble so you can immediately
+    	// start (or resume) editing.  And your now optional 
+    	// 3rd click can easily place the caret where you want.
+    	clearSelection();
         if (TestDebug||DEBUG.FOCUS) outc("focusGained from " + e.getOppositeComponent());
     }
 

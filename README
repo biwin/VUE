@@ -1,3 +1,203 @@
+Last modified Feb. 22, 2017.
+
+VUE modified to suit my (Apollia's) personal tastes.
+
+Warning: This might be glitchy.  I'm still mostly a Java newbie.
+
+
+---------
+Changelog
+---------
+
+Jan. 7, 2017:  Here's what I managed to do so far:
+
+* Turned on debug mode.
+
+
+* Made it so when running VUE on a Unix-like platform, the default Java look-and-feel is now GTK, not Metal.  (This is just to make VUE blend in better with my preferred dark GTK theme.)
+
+
+* Switching to the GTK look-and-feel somehow made it impossible to get out of (or into) split-screen mode.  So, I got rid of the split-screen that appears at startup.  (Told the mViewerSplit object to remove its righthand panel.)
+
+
+* Made it possible to successfully open files and web pages by clicking resource buttons attached to nodes (or as I prefer to call them, bubbles).
+
+Now, VUE doesn't try to open GNOME, KDE, Firefox, or Netscape to deal with filepath resources or URL resources attached to bubbles.
+
+Instead, VUE tries to send filepaths to a shell command called "for_vue---filepath_opener", and tries to send URLs to a shell command called "for_vue---weburl_opener".
+
+Those shell commands can do anything you want.  On my system, "for_vue---filepath_opener" is simply a symlink to Puppy Linux's default file-manager, Rox-Filer, and "for_vue---weburl_opener" is a symlink to the Pale Moon web browser.
+
+So, now I can do things like launch other programs and scripts, and visit web pages, just by clicking currently inconveniently tiny buttons in VUE.
+
+Reminds me a little of HyperCard.  http://www.loper-os.org/?p=568
+
+
+* Changed the default background color for new maps to black.
+
+
+* Removed the border from the "Search Everything" box (which apparently doesn't do anything, at least in Puppy Linux) and changed it to green text on a darker green background.
+
+
+----
+
+Jan. 23, 2017:
+
+* A new submenu of the Edit menu called "Etc."  I moved the dangerous "Cut" and "Delete" menu items into it.
+
+
+* A new command, "Insert Current Date/Time" (keyboard shortcut: F5).  It's in the new "Insert Bubble or Text" submenu of the Edit menu.
+
+It inserts dates in this format: 2017-01-23 14:55:49
+
+It works on bubbles or links, but for some reason, doesn't work on text blocks.  (Which I didn't fix, because I never use text blocks anyway.)
+
+If no bubble or link is selected, or if more than one is selected, a new bubble is created, containing the current date/time.
+
+If one bubble or link is selected, the current date/time is added to the label of the selected bubble or link, either at the end of the label, or wherever the caret currently is.
+
+
+* Changed the original dangerous behavior of ESC while editing a bubble label or link label.
+
+Originally, ESC would delete all the changes to a bubble label or link label, and even Undo or Redo couldn't retrieve whatever was deleted.
+
+Now, ESC leaves the label text alone, and just deselects the bubble or link you were editing.
+
+(Which is how text blocks already reacted to ESC, so I didn't change anything related to text blocks.)
+
+
+* Now, bubbles dragged into other bubbles won't be shrunk down and won't have their background colors darkened.
+
+And images dragged into bubbles also won't be shrunk down.
+
+
+----
+
+Feb. 10, 2017:
+
+* Formerly, clicking a bubble to edit it would unnecessarily highlight all text.  Now, VUE automatically unhighlights that text, so fewer clicks are necessary to edit a bubble.
+
+* A new Edit menu item - Deselect. (Keyboard shortcut: ESC)  Only works if only one item is selected.
+
+* All text in both bubbles and links is now left-justified.
+
+* Formerly, the text caret couldn't be seen on dark backgrounds.  To fix that, the text caret is given the same color as the current bubble or link's text color.
+
+* I attempted to make word wrap work inside bubbles.  I got surprisingly far with it, but, unfortunately, word-wrapping went away when I loaded a saved map.  And also when changing the text color.  So, I reverted those changes, since wordwrap won't be very useful until I figure out how to fix all that.
+
+
+----
+
+Feb. 12, 2017:
+
+* Now you can quickly scroll through your map tabs using your mouse wheel!
+
+Uses almost unchanged code from here:
+
+http://stackoverflow.com/a/38463104
+http://stackoverflow.com/questions/38463047/use-mouse-to-scroll-through-tabs-in-jtabbedpane
+
+
+* It's now possible to drag and drop tabs to reorder them!
+
+Uses code from here:
+
+http://stackoverflow.com/a/61982
+
+Which is unchanged except for replacing the convertTab method with an unchanged copy of the code from this post:
+http://stackoverflow.com/a/8610017
+
+Both of those links go to:
+http://stackoverflow.com/questions/60269/how-to-implement-draggable-tab-using-java-swing
+
+
+* Possibly fixed the longstanding problem of mistaken-seeming "Failed to load map" dialog boxes sometimes popping up when loading a map (which always seemed mistaken because it always looked like the map loaded just fine).  All I had to do was comment out two lines in MapTabbedPane.java.
+
+
+----
+
+Feb. 16, 2017:
+
+* I commented out the code that caused VUE at startup to connect to vue.tufts.edu to look for an updated version of itself.
+
+* I commented out and/or modified the worrying-looking code that seemed to be causing VUE to send every web URL the user added to a VUE map to the website open.thumbshots.org.
+
+
+* I was dismayed to find that my copy of Java seemed to be, by default, granting all permissions to any Java software I ran.
+
+So, I tried to make a Java security policy file for VUE, to try to stop Java from being so darn permissive.  I also made some shell scripts to launch VUE using that policy file.
+
+That policy file requires the Pro-Grade library - http://pro-grade.sourceforge.net/ - because astonishingly, without that, Java policies only have a command to "grant" permissions, but not "deny" them!
+
+Unfortunately, I still haven't figured out how to block absolutely everything I might possibly want to block, since whether or not I use Pro-Grade, my policy file still fails to block some worrying-looking things.
+
+
+----
+
+Feb. 18, 2017:
+
+* Now Ctrl-T makes a new tab with a new map, instead of inserting a new textblock.  (Ctrl-Shift-N no longer creates a new map.)
+
+* Added a line (and comments) to the Java security policy.  That line seems to make it possible for images to get redrawn.  Otherwise, they vanish after a while, even though they appear when you first load a map.
+
+----
+
+Feb. 19, 2017:
+
+* Now my VUE launcher scripts can accept arguments, so you can open the maps
+of your choice at startup.
+
+----
+
+Feb. 21, 2017:
+
+* Now it's possible to rename layers while using VUE in Puppy Linux.
+
+* Now, URLs you dragdrop into a VUE map are left alone and inserted verbatim.  Newlines aren't inserted into them anymore, and they no longer get abbreviated at all.
+
+* I made the Layers panel's colors match my dark desktop theme better.
+
+* Also changed some other GUI colors.  The gradient in the subtitles of the Info panel is now darker.  Not sure what my other changes did.
+
+* Somehow, changing the Layers panel broke the Categories dropdown in the Info panel.  Java is now one of my least favorite programming languages, below Python.
+
+----
+
+Feb. 22, 2017:
+
+* Without changing a thing, I discovered that the Categories dropdown actually wasn't totally broken in the copy of VUE I built outside of Eclipse with Ant.
+
+When I built VUE with Ant, the Categories dropdown somehow went back to its usual unreliable but somewhat functional enough behavior.
+
+I actually have to duplicate my entire VUE folder to build with Ant, because once, when I ran Ant in the same VUE folder Eclipse was using, Eclipse got totally messed up.
+
+Would be nice if I knew where Eclipse puts things it builds, but I couldn't figure that out, so I just use Ant to build VUE.
+
+
+* Now Ctrl-3 brings up the Panner (which I use a lot) instead of the Content panel, which I never use.
+
+
+* Using ImageMagick 7.0.5-0, I changed the colors of maybe all images in VUE to make VUE match my personal desktop theme even better.  The colors range from semi-bright gold to dark goldenrod.  (Might look orangish or brown, depending on your monitor or system display settings.)
+
+
+* The toolbar's highlight is now a brown gradient.
+
+
+* The "focus indicator" (a formerly white box at the lower right of the VUE window) is now black.
+
+
+* I also finally figured out how to change the colors of the title bar of panels (such as Panner, or Layers), including the text color!
+
+----
+
+Warning: This might be glitchy.  I'm still mostly a Java newbie.
+
+
+End of notes by Apollia.
+-----
+Text not by Apollia:
+-----
+
 Visual Understanding Environment (VUE) is a powerful teaching and presentation tool.
 
 1. Code Organization

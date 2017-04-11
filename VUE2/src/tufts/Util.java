@@ -940,21 +940,9 @@ public class Util
 
         if (!GnomeOpenSet) {
 
-            // test for gnome    
-            try {    	    	
-                process = runtime.exec("gnome-open");    	
-                waitFor = process.waitFor();
-            }
-            catch (InterruptedException e) {    			
-                e.printStackTrace();    		
-            }
-            catch (IOException ioe2) {
-                ioe2.printStackTrace();
-                waitFor = 2;
-            }
-
+          
             GnomeOpenSet = true;
-            if (waitFor != 2)
+            
                 HasGnomeOpen = true;
         }
 
@@ -972,102 +960,44 @@ public class Util
                 // old:
                 ////jjurl = url.replaceAll(" ","\\ ");
                 ////url ="\""+url+"\"";
+                Log.info("for_vue---filepath_opener " + url);
+
+                process = runtime.exec(new String[] {"for_vue---filepath_opener" , url});
+                //			out("process: " + process);
+                InputStream stdin = process.getErrorStream();
+                InputStreamReader isr = new InputStreamReader(stdin);
+                BufferedReader br = new BufferedReader(isr);
+                String line = null;
+                System.out.println("<OUTPUT>");
+                while ((line = br.readLine()) != null)
+                    System.out.println(line);
+                System.out.println("<OUTPUT>");
+                try
+                    {
+                        int exitVal = process.waitFor();
+                        System.out.println("exit val : " + exitVal);
+                    }
+                catch(InterruptedException inte)
+                    {
+                        inte.printStackTrace();
+                    }
+                return;
             }
 
-            Log.info("gnome-open " + url);
-
-            process = runtime.exec(new String[] {"gnome-open" , url});
-            //			out("process: " + process);
-            InputStream stdin = process.getErrorStream();
-            InputStreamReader isr = new InputStreamReader(stdin);
-            BufferedReader br = new BufferedReader(isr);
-            String line = null;
-            System.out.println("<OUTPUT>");
-            while ((line = br.readLine()) != null)
-                System.out.println(line);
-            System.out.println("<OUTPUT>");
-            try
-                {
-                    int exitVal = process.waitFor();
-                    System.out.println("exit val : " + exitVal);
-                }
-            catch(InterruptedException inte)
-                {
-                    inte.printStackTrace();
-                }
-            return;
+            
         }
         else
             waitFor=-1;
-    	
-
-        //    	kde
-    	try 
-            {    	    	
-    		System.out.println("TESTING KDE");
-    		process =runtime.exec("kfmexec");    	
-    		waitFor = process.waitFor();
-            } catch (InterruptedException e) 
-            {    			
-                e.printStackTrace();    		
-            }
-    	catch (IOException ioe2)
-            {
-    		ioe2.printStackTrace();
-    		waitFor=2;
-   
-            }
-    	
-    	if (waitFor != 2)
-    	{
-    		if (isLocalFile)
-			{
-				url = decodeURL(url);
-				//jjurl = url.replaceAll(" ","\\ ");
-				url = "file:///" + url.substring(6);
-				//url ="\""+url+"\"";
-				System.out.println(url);
-			}
-    		//open file with kde
-    		process = runtime.exec(new String[] { "kfmclient","exec", url});
-    		InputStream stdin = process.getErrorStream();
-			InputStreamReader isr = new InputStreamReader(stdin);
-			BufferedReader br = new BufferedReader(isr);
-			String line = null;
-			System.out.println("<OUTPUT>");
-			while ((line = br.readLine()) != null)
-				System.out.println(line);
-			System.out.println("<OUTPUT>");
-			
-			System.out.println("<OUTPUT2>");
-			stdin=process.getInputStream();
-			isr = new InputStreamReader(stdin);
-			br = new BufferedReader(isr);
-			line = null;
-			
-			while ((line = br.readLine()) != null)
-				System.out.println(line);
-			System.out.println("<OUTPUT2>");
-			try
-			{
-				int exitVal = process.waitFor();
-				System.out.println("exit val : " + exitVal);
-			}
-			catch(InterruptedException inte)
-			{
-				inte.printStackTrace();
-			}
-			return;
-    	}
+    
     	
     	
 
-    	    	
+    	
     	
     	//if (waitFor == 2)
     	try
     	{
-    		process = runtime.exec(new String[] { "firefox", url});
+    		process = runtime.exec(new String[] { "for_vue---weburl_opener", url});
             waitFor = process.waitFor();
             System.out.println("WAIT FOR : " + waitFor);
     	}

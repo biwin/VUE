@@ -78,8 +78,8 @@ public class VueButtonIcon implements Icon
         }
     }
 
-    private static final Color sButtonColor = new Color(222,222,222);
-    private static final Color sOverColor = Color.gray;
+    private static final Color sButtonColor = new Color(0,100,0);
+    private static final Color sOverColor = Color.green;
     private static final Color sDownColor = sOverColor;
     private static final AbstractBorder sRolloverBorder = new EtchedBorder();
     //private static final AbstractBorder sRolloverBorder = new EtchedBorder(EtchedBorder.RAISED);
@@ -180,7 +180,7 @@ public class VueButtonIcon implements Icon
         float gw = width;
         //GradientPaint gradient = new GradientPaint(gw/2,0,Color.white,gw/2,h/2,mColor,true);
         //GradientPaint gradient = new GradientPaint(gw/6,0,Color.white,gw/2,h/2,mColor,true);
-        GradientPaint gradient = new GradientPaint(gw/6,0,Color.white,gw*.33f,h/2,mColor,true);
+        GradientPaint gradient = new GradientPaint(gw/6,0,Color.decode("#522000"),gw*.33f,h/2,Color.decode("#744200"),true);
         // Set gradient for the whole button.
 
         if (isPressIcon) {

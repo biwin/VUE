@@ -106,7 +106,8 @@ public class MapScrollPane extends javax.swing.JScrollPane
                 line = GUI.AquaFocusBorderLight.darker();
                 //line = AquaFocusBorderDark;
             } else {
-                fill = GUI.getToolbarColor();
+               // fill = GUI.getToolbarColor();
+            	fill = Color.black;
                 line = fill.darker();
             }
         }

@@ -20,3 +20,7 @@ signing_code/VUE.app
 
 # ignore ide files
 .idea/
+
+.hg/
+.hgignore
+.hgtimestamp
